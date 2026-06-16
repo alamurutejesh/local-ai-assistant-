@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Local AI Assistant</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:#0f172a;
+            color:white;
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .container{
+            width:90%;
+            max-width:900px;
+            height:90vh;
+            background:#111827;
+            border-radius:16px;
+            display:flex;
+            flex-direction:column;
+            overflow:hidden;
+        }
+
+        .header{
+            padding:15px;
+            border-bottom:1px solid #374151;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        .title{
+            font-size:20px;
+            font-weight:bold;
+        }
+
+        .chat{
+            flex:1;
+            overflow-y:auto;
+            padding:20px;
+        }
+
+        .message{
+            max-width:80%;
+            padding:12px;
+            margin-bottom:12px;
+            border-radius:12px;
+            white-space:pre-wrap;
+        }
+
+        .user{
+            background:#2563eb;
+            margin-left:auto;
+        }
+
+        .bot{
+            background:#1f2937;
+        }
+
+        .controls{
+            padding:15px;
+            border-top:1px solid #374151;
+        }
+
+        .top-row{
+            display:flex;
+            gap:10px;
+            margin-bottom:10px;
+        }
+
+        select{
+            padding:10px;
+            background:#1f2937;
+            color:white;
+            border:none;
+            border-radius:8px;
+        }
+
+        button{
+            padding:10px 15px;
+            background:#2563eb;
+            color:white;
+            border:none;
+            border-radius:8px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            opacity:0.9;
+        }
+
+        .input-row{
+            display:flex;
+            gap:10px;
+        }
+
+        input{
+            flex:1;
+            padding:12px;
+            border:none;
+            border-radius:8px;
+            background:#1f2937;
+            color:white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div class="title">Local AI Assistant</div>
+
+        <button onclick="newChat()">
+            New Chat
+        </button>
+    </div>
+
+    <div id="chat" class="chat"></div>
+
+    <div class="controls">
+
+        <div class="top-row">
+
+            <select id="model">
+                <option value="mistral">Mistral</option>
+                <option value="llama3.2">Llama 3.2</option>
+                <option value="phi3">Phi-3</option>
+            </select>
+
+        </div>
+
+        <div class="input-row">
+
+            <input
+                id="prompt"
+                type="text"
+                placeholder="Type your message..."
+                onkeypress="if(event.key==='Enter') sendMessage()"
+            >
+
+            <button onclick="sendMessage()">
+                Send
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+async function sendMessage(){
+
+    const promptInput = document.getElementById("prompt");
+    const prompt = promptInput.value.trim();
+
+    if(!prompt) return;
+
+    const model = document.getElementById("model").value;
+
+    const chat = document.getElementById("chat");
+
+    chat.innerHTML += `
+        <div class="message user">${prompt}</div>
+    `;
+
+    promptInput.value = "";
+
+    chat.innerHTML += `
+        <div class="message bot" id="thinking">
+            Thinking...
+        </div>
+    `;
+
+    chat.scrollTop = chat.scrollHeight;
+
+    try{
+
+        const response = await fetch(
+            `/ask?model=${model}&prompt=${encodeURIComponent(prompt)}`
+        );
+
+        const data = await response.json();
+
+        document.getElementById("thinking").remove();
+
+        chat.innerHTML += `
+            <div class="message bot">
+                ${data.response || "No response"}
+            </div>
+        `;
+
+        chat.scrollTop = chat.scrollHeight;
+
+    }catch(error){
+
+        document.getElementById("thinking").remove();
+
+        chat.innerHTML += `
+            <div class="message bot">
+                Error connecting to server
+            </div>
+        `;
+    }
+}
+
+async function newChat(){
+
+    await fetch("/clear");
+
+    document.getElementById("chat").innerHTML = "";
+}
+
+</script>
+
+</body>
+</html>

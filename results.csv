@@ -1,0 +1,10 @@
+Model,Task,Time_Seconds
+Mistral,Knowledge,28.53
+Mistral,Coding,39.90
+Mistral,Reasoning,10.35
+Llama3.2,Knowledge,19.40
+Llama3.2,Coding,16.86
+Llama3.2,Reasoning,10.83
+Phi3,Knowledge,23.78
+Phi3,Coding,91.60
+Phi3,Reasoning,98.55
