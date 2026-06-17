@@ -1,180 +1,165 @@
-**# Local AI Assistant using Ollama**
+## Local AI Assistant Using Ollama
 
+## Overview
 
+Local AI Assistant is an offline chatbot built using **Ollama**, **FastAPI**, and **Small Language Models (SLMs)**. The application runs entirely on a local machine without requiring cloud APIs, providing enhanced privacy, zero API costs, and low-latency responses.
 
-**## Overview**
+## Features
 
+* Fully offline AI assistant
+* Multiple model support:
 
+  * Mistral
+  * Llama 3.2
+  * Phi-3
+* FastAPI backend
+* Modern web interface using HTML, CSS, and JavaScript
+* Conversation memory
+* Model benchmarking and performance comparison
+* Privacy-focused architecture
+* No external API dependency
 
-**This project is an offline AI assistant built using Ollama, FastAPI, and Small Language Models (SLMs).**
+## Technologies Used
 
+* Python 3.11
+* Ollama
+* FastAPI
+* HTML5
+* CSS3
+* JavaScript
+* Requests
+* Jinja2
+* Matplotlib
 
+## Project Structure
 
-**## Features**
+```text
+local-ai-assistant/
+│
+├── app.py
+├── benchmark.py
+├── graph.py
+├── results.csv
+├── README.md
+├── report.md
+│
+├── screenshots/
+│
+├── templates/
+│   └── index.html
+│
+└── venv/
+```
 
+## Installation
 
+### 1. Clone the Repository
 
-**\* Fully offline AI assistant**
+```bash
+git clone https://github.com/<your-username>/local-ai-assistant-.git
+cd local-ai-assistant-
+```
 
-**\* Supports multiple models:**
+### 2. Create a Virtual Environment
 
+```bash
+python -m venv venv
+```
 
+### 3. Activate the Virtual Environment
 
-&#x20; **\* Mistral**
+Windows:
 
-&#x20; **\* Llama 3.2**
+```bash
+venv\Scripts\activate
+```
 
-&#x20; **\* Phi-3**
+### 4. Install Dependencies
 
-**\* FastAPI backend**
+```bash
+pip install fastapi uvicorn requests jinja2 matplotlib
+```
 
-**\* HTML/CSS/JavaScript frontend**
+### 5. Install Ollama
 
-**\* Conversation memory**
+Download and install Ollama from:
 
-**\* Model benchmarking**
+https://ollama.com
 
-**\* Privacy-focused design**
+### 6. Download Models
 
+```bash
+ollama pull mistral
+ollama pull llama3.2
+ollama pull phi3
+```
 
+### 7. Run the Application
 
-**## Technologies Used**
+```bash
+python -m uvicorn app:app --reload
+```
 
+### 8. Open in Browser
 
+```text
+http://127.0.0.1:8000
+```
 
-**\* Python 3.11**
+## Benchmark Evaluation
 
-**\* Ollama**
+The following models were evaluated:
 
-**\* FastAPI**
+* Mistral
+* Llama 3.2
+* Phi-3
 
-**\* HTML**
+### Benchmark Categories
 
-**\* CSS**
+* Knowledge Tasks
+* Coding Tasks
+* Reasoning Tasks
 
-**\* JavaScript**
+### Sample Prompts
 
+**Knowledge**
 
+> Explain Machine Learning in 100 words.
 
-**## Installation**
+**Coding**
 
+> Write a Python function for Binary Search.
 
+**Reasoning**
 
-**1. Install Python 3.11**
+> A farmer has 17 sheep. All but 9 die. How many remain?
 
-**2. Install Ollama**
+## Advantages
 
-**3. Create virtual environment**
+* Runs completely offline
+* No subscription costs
+* No API token usage
+* Better privacy and security
+* Supports multiple local language models
+* Easy deployment and customization
 
+## Future Enhancements
 
+* Streaming responses
+* Voice input support
+* PDF question answering
+* Chat export functionality
+* Model comparison dashboard
+* Dark/Light theme toggle
 
-**```bash**
+## Author
 
-**python -m venv venv**
+Tejesh Naidu
 
-**```**
+## License
 
+This project is developed for educational and learning purposes.
 
-
-**4. Activate virtual environment**
-
-
-
-**```bash**
-
-**venv\\Scripts\\activate**
-
-**```**
-
-
-
-**5. Install dependencies**
-
-
-
-**```bash**
-
-**pip install fastapi uvicorn requests jinja2 matplotlib**
-
-**```**
-
-
-
-**6. Download models**
-
-
-
-**```bash**
-
-**ollama pull mistral**
-
-**ollama pull llama3.2**
-
-**ollama pull phi3**
-
-**```**
-
-
-
-**7. Run application**
-
-
-
-**```bash**
-
-**python -m uvicorn app:app --reload**
-
-**```**
-
-
-
-**8. Open**
-
-
-
-**http://127.0.0.1:8000**
-
-
-
-**## Benchmark Results**
-
-
-
-**Models compared:**
-
-
-
-**\* Mistral**
-
-**\* Llama 3.2**
-
-**\* Phi-3**
-
-
-
-**Benchmark categories:**
-
-
-
-**\* Knowledge**
-
-**\* Coding**
-
-**\* Reasoning**
-
-
-
-**## Advantages**
-
-
-
-**\* No cloud dependency**
-
-**\* No API cost**
-
-**\* Better privacy**
-
-**\* Low latency**
 
 
 
